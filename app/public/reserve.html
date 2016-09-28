@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Friend Finder Survey</title>
+
+
+	<!-- Latest compiled and minified CSS & JS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</head>
+<body>
+	<form id = "form">
+    <h1>Meat Survey</h1>
+		<table>
+			<tr>
+				<td>What's Your name?</td>
+			</tr>
+			<tr>
+				<td><input type="text" name="username" placeholder="Michelle"></td>
+			</tr>
+			<tr>
+				<td>Please give me an image URL</td>
+			</tr>
+			<tr>
+				<td><input type="src" name="photo" placeholder="www.google.com"></td>
+			</tr>
+			<tr>
+				<td>Do you like Pork?</td>
+				<td>
+					<input type="radio" name="pork" value="5">Super Like
+					<input type="radio" name="pork" value="1">Dislike
+			</tr>
+			<tr>
+				<td>Do you like Beef?</td>
+				<td>
+					<input type="radio" name="beef" value="5">Super Like
+					<input type="radio" name="beef" value="1">Dislike
+			</tr>
+		</table>
+
+		<button type="submit" class="btn btn-primary submit" id="submit">Submit</button>
+	</form>
+</body>
+</html>
+
+
+<script type="text/javascript">
+  var form = document.getElementById('form')
+  var pork = form.elements.pork
+  var beef = form.elements.beef
+  var display = document.getElementById('submit')
+  var user = form.elements.username
+  var photo = form.elements.photo
+
+display.onclick = function() {
+	var name = user.value;
+	var imageurl = photo.value;
+	console.log(name,imageurl)
+
+	for(i = 0; i < pork.length; i++) {
+		if(pork[i].checked)
+			var porkValue = pork[i].value
+	}  
+  	for(i = 0; i < beef.length; i++) {
+      if(beef[i].checked)
+      var beefValue = beef[i].value
+}
+  console.log(name,imageurl,beefValue,porkValue)
+
+  var results = {
+  	userName: name,
+  	userImage: imageurl,
+    porkscore: porkValue,
+    beefscore: beefValue
+  }
+
+  console.log("the answer is: " + results.userName);
+
+  var currentURL = window.location.origin;
+
+  $.post(currentURL + "/api/tables", results, function(data){
+
+  		if (data == true) {
+  			alert (" yay! you finished!")
+  		}
+
+  		if (data == false) {
+  			alert(" sorry, please try again later")
+  		}
+  	})
+
+return false;
+};
+
+
+</script>
+
+
