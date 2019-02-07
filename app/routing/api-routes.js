@@ -4,7 +4,7 @@
 // These data sources hold arrays of information on all possible friends
 // ===============================================================================
 
-var friends 		= require('../data/friends.js');
+var friends = require('../data/friends.js');
 
 
 // ===============================================================================
@@ -43,14 +43,11 @@ module.exports = function(app){
 		// loop through all of the options 
 		var bestMatch = {
 			name: "",
-			photo: "",
 			friendDifference: 1000
 		};
 
 		// Here we take the result of the user's survey POST and parse it.
 		var userData 	= req.body;
-		var userName 	= userData.name;
-		var userPhoto 	= userData.photo;
 		var userScores 	= userData.scores;
 
 		// This variable will calculate the difference between the user's scores and the scores of
@@ -69,12 +66,11 @@ module.exports = function(app){
 				// We calculate the difference between the scores and sum them into the totalDifference
 				totalDifference += Math.abs(parseInt(userScores[j]) - parseInt(friends[i].scores[j]));
 
-				// If the sum of differences is less then the differences of the current "best match"
+				// If the sum of differences is less than the differences of the current "best match"
 				if (totalDifference <= bestMatch.friendDifference){
 
 					// Reset the bestMatch to be the new friend. 
 					bestMatch.name = friends[i].name;
-					bestMatch.photo = friends[i].photo;
 					bestMatch.friendDifference = totalDifference;
 				}
 			}

@@ -5,10 +5,6 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var path = require('path');
-
-
-
 
 
 
@@ -29,10 +25,6 @@ app.use(bodyParser.json({type:'application/vnd.api+json'}));
 
 
 
-
-
-
-
 // ================================================================================
 // ROUTER
 // The below points our server to a series of "route" files.
@@ -41,10 +33,6 @@ app.use(bodyParser.json({type:'application/vnd.api+json'}));
 
 require('./app/routing/api-routes.js')(app); 
 require('./app/routing/html-routes.js')(app);
-
-
-
-
 
 
 
